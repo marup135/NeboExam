@@ -29,6 +29,11 @@ class LockedActivity : AppCompatActivity() {
         binding = ActivityLockedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val count = LockManager.getViolationCount(this)
+        if (count > 0) {
+            binding.tvLockMessage.text = "Terdeteksi indikasi kecurangan (Pelanggaran Ke-$count). Perangkat terkunci otomatis."
+        }
+
         // Disable back button
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {

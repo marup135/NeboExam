@@ -12,6 +12,7 @@ object LockManager {
     private const val KEY_IS_LOCKED = "is_locked"
     private const val KEY_PENALTY_REMAINING = "penalty_remaining"
     private const val KEY_LAST_ELAPSED = "last_elapsed"
+    private const val KEY_VIOLATION_COUNT = "violation_count"
 
     private fun getPrefs(context: Context): SharedPreferences {
         val masterKey = MasterKey.Builder(context)
@@ -28,11 +29,25 @@ object LockManager {
 
     fun triggerPenalty(context: Context) {
         val prefs = getPrefs(context)
+        val currentCount = prefs.getInt(KEY_VIOLATION_COUNT, 0) + 1
+
+        val penaltyDurationMs = when (currentCount) {
+            1 -> 5 * 60 * 1000L // Pelanggaran 1: 5 Menit
+            2 -> 15 * 60 * 1000L // Pelanggaran 2: 15 Menit
+            3 -> 30 * 60 * 1000L // Pelanggaran 3: 30 Menit
+            else -> 60 * 60 * 1000L // Pelanggaran > 3: 1 Jam (60 Menit)
+        }
+
         prefs.edit()
             .putBoolean(KEY_IS_LOCKED, true)
-            .putLong(KEY_PENALTY_REMAINING, Constants.PENALTY_DURATION_MS)
+            .putInt(KEY_VIOLATION_COUNT, currentCount)
+            .putLong(KEY_PENALTY_REMAINING, penaltyDurationMs)
             .putLong(KEY_LAST_ELAPSED, SystemClock.elapsedRealtime())
             .apply()
+    }
+
+    fun getViolationCount(context: Context): Int {
+        return getPrefs(context).getInt(KEY_VIOLATION_COUNT, 0)
     }
 
     fun getRemainingPenaltyTimeMs(context: Context): Long {
@@ -50,7 +65,7 @@ object LockManager {
         } else {
             val remaining = savedDuration - timePassed
             if (remaining <= 0) {
-                resetPenalty(context)
+                clearLockStateOnly(context)
                 0L
             } else {
                 prefs.edit()
@@ -63,6 +78,14 @@ object LockManager {
     }
 
     fun isPenaltyActive(context: Context): Boolean = getRemainingPenaltyTimeMs(context) > 0
+
+    private fun clearLockStateOnly(context: Context) {
+        getPrefs(context).edit()
+            .putBoolean(KEY_IS_LOCKED, false)
+            .putLong(KEY_PENALTY_REMAINING, 0L)
+            .putLong(KEY_LAST_ELAPSED, 0L)
+            .apply()
+    }
 
     fun resetPenalty(context: Context) {
         getPrefs(context).edit().clear().apply()
