@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NeboExam</string>
+    <string name="app_version">Versi 1.0.0 (beta)</string>
 </resources>

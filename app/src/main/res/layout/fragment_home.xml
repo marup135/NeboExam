@@ -9,56 +9,66 @@
     android:padding="24dp"
     tools:context=".ui.HomeFragment">
 
-    <ImageView
-        android:id="@+id/ivLogo"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+    <!-- Header Container -->
+    <LinearLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:contentDescription="Logo SMKN 1 Bojong"
-        android:src="@android:drawable/ic_dialog_info"
-        app:tint="#1E3A8A"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="NeboExam"
-        android:textColor="#1E3A8A"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+        <ImageView
+            android:id="@+id/ivSchoolLogo"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="-8dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="Logo SMKN 1 Bojong"
+            android:scaleType="fitCenter"
+            android:src="@drawable/nebo_exam" />
 
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="SMKN 1 BOJONG PURWAKARTA"
-        android:textColor="#475569"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+        <TextView
+            android:id="@+id/tvAppTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:text="NeboExam"
+            android:textColor="#0D2B45"
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tvSchoolSubtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="SMKN 1 BOJONG PURWAKARTA"
+            android:textColor="#475569"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Kartu Peraturan Ujian -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardRules"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
         app:strokeColor="#CBD5E1"
         app:strokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
+        app:layout_constraintTop_toBottomOf="@id/headerContainer">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,16 +95,17 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <!-- Tombol Mulai Scan Ujian -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnStartExam"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="24dp"
-        android:text="Mulai Scan Ujian"
+        android:layout_height="52dp"
+        android:layout_marginBottom="32dp"
+        android:text="MULAI SCAN UJIAN"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:backgroundTint="#0D2B45"
         app:cornerRadius="12dp"
-        app:backgroundTint="#1E3A8A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

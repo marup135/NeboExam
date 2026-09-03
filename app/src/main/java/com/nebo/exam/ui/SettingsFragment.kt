@@ -89,7 +89,7 @@ class SettingsFragment : Fragment() {
             .setTitle("Tentang NeboExam")
             .setMessage(
                 "Nama Aplikasi: NeboExam\n" +
-                "Versi: 1.0.0\n\n" +
+                "Versi: 1.0.0 (beta)\n\n" +
                 "Instansi:\n" +
                 "SMKN 1 Bojong Purwakarta\n\n" +
                 "Pengembang:\n" +
