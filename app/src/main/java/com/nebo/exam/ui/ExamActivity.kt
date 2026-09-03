@@ -135,7 +135,7 @@ class ExamActivity : AppCompatActivity() {
             .setTitle("Ujian Selesai")
             .setMessage("Jawaban Anda telah berhasil dikirim. Terima kasih!")
             .setPositiveButton("Selesai") { _, _ ->
-                val intent = Intent(this, HomeActivity::class.java).apply {
+                val intent = Intent(this, MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
                 startActivity(intent)
